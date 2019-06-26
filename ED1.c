@@ -124,7 +124,7 @@ void jogar(int dif) {
 
 	al_flip_display();
 
-	al_rest(1.0);
+	al_rest(0.5);
 	geraSeq(dif, fila);
 
 	reproduzirSequencia(fila, qtde);
@@ -179,7 +179,7 @@ void jogar(int dif) {
 
 					al_flip_display();
 
-					al_rest(1.0);					
+					al_rest(0.5);					
 				}
 				else if (event.keyboard.keycode == ALLEGRO_KEY_A) {
 					entradas[record] = 1;
@@ -202,7 +202,7 @@ void jogar(int dif) {
 
 					al_flip_display();
 
-					al_rest(1.0);
+					al_rest(0.5);
 
 					
 				}
@@ -227,7 +227,7 @@ void jogar(int dif) {
 
 					al_flip_display();
 
-					al_rest(1.0);
+					al_rest(0.5);
 
 					
 				}
@@ -252,7 +252,7 @@ void jogar(int dif) {
 
 					al_flip_display();
 
-					al_rest(1.0);
+					al_rest(0.5);
 
 					
 				}
@@ -396,7 +396,7 @@ void reproduzirSequencia(FILA* f, int qtde) {
 
 		al_flip_display();
 
-		al_rest(3.0);
+		al_rest(1.5);
 
 		al_clear_to_color(al_map_rgb(000, 000, 000));
 		al_draw_filled_rectangle(300, 200, 400, 300, al_map_rgb(238, 173, 45)); //255 255 0 Q
@@ -416,7 +416,7 @@ void reproduzirSequencia(FILA* f, int qtde) {
 
 		al_flip_display();
 
-		al_rest(1.0);
+		al_rest(0.5);
 		aux = aux->prox;
 
 		i++;
