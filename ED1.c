@@ -280,6 +280,8 @@ void jogar(int dif) {
 			al_draw_text(font, al_map_rgb(255, 255, 255), 55, 550, ALLEGRO_ALIGN_CENTER, "S");
 
 			al_flip_display();
+
+			al_rest(0.8);
 			if (record == qtde)
 				confere = 1;
 		}
