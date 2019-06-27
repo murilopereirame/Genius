@@ -34,21 +34,21 @@ int main() {
 	queue = al_create_event_queue();
 	al_register_event_source(queue, al_get_keyboard_event_source());
 
-	ALLEGRO_DISPLAY * disp = al_create_display(800, 600);
+	ALLEGRO_DISPLAY* disp = al_create_display(800, 600);
 
-	ALLEGRO_FONT * font = al_create_builtin_font();
+	ALLEGRO_FONT* font = al_create_builtin_font();
 	ALLEGRO_BITMAP* imagem = NULL;
 
 	al_init_image_addon();
 	al_init_primitives_addon();
 	imagem = al_load_bitmap("GENIUS.png");
-	al_clear_to_color(al_map_rgb(0, 0, 0));	
+	al_clear_to_color(al_map_rgb(0, 0, 0));
 	al_draw_bitmap(imagem, 300, 50, 0);
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 250, ALLEGRO_ALIGN_CENTER, "====Bem vindo ao GENIUS!====");	
+	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 250, ALLEGRO_ALIGN_CENTER, "====Bem vindo ao GENIUS!====");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 270, ALLEGRO_ALIGN_CENTER, "Tecle \"J\" para jogar.");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para créditos.");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para crÃ©ditos.");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"E\" para sair.");
-	
+
 	al_flip_display();
 
 	int selection = 0;
@@ -61,7 +61,7 @@ int main() {
 		{
 			if (event.keyboard.keycode == ALLEGRO_KEY_C) {
 				al_destroy_bitmap(imagem);
-				menu(2);								
+				menu(2);
 			}
 			else if (event.keyboard.keycode == ALLEGRO_KEY_J) {
 				al_destroy_bitmap(imagem);
@@ -70,23 +70,23 @@ int main() {
 			else if (event.keyboard.keycode == ALLEGRO_KEY_E) {
 				selection = 1;
 			}
-		}		
-	}		
+		}
+	}
 	return 0;
 }
 
 void menu(int op) {
 	switch (op)
 	{
-		case 1: 
-			jogar(dificuldade());
-			break;
-		case 2:
-			creditos();
-			break;
+	case 1:
+		jogar(dificuldade());
+		break;
+	case 2:
+		creditos();
+		break;
 
-		default:
-			break;
+	default:
+		break;
 	}
 
 	return;
@@ -97,9 +97,9 @@ void jogar(int dif) {
 	ALLEGRO_FONT* font = al_create_builtin_font();
 	fila->inicio = NULL;
 	/*==Dificuldades==
-	 * 20 Fácil 0
-	 * 30 Médio 1
-	 * 50 Difícil 2
+	 * 20 FÃ¡cil 0
+	 * 30 MÃ©dio 1
+	 * 50 DifÃ­cil 2
 	*/
 
 	int tamSeq = 0;
@@ -133,9 +133,9 @@ void jogar(int dif) {
 	geraSeq(dif, fila);
 
 	reproduzirSequencia(fila, qtde);
-	
+
 	int gameover = 1;
-	int reproduz = 0;	
+	int reproduz = 0;
 	int win = 0;
 	while (gameover) {
 
@@ -147,7 +147,7 @@ void jogar(int dif) {
 
 		if (reproduz) {
 			qtde += 1;
-			reproduzirSequencia(fila, qtde);			
+			reproduzirSequencia(fila, qtde);
 			reproduz = 0;
 		}
 		int entradas[100];
@@ -157,7 +157,7 @@ void jogar(int dif) {
 			ALLEGRO_EVENT_QUEUE* queue;
 			queue = al_create_event_queue();
 			al_register_event_source(queue, al_get_keyboard_event_source());
-				
+
 			ALLEGRO_EVENT event;
 			al_wait_for_event(queue, &event);
 
@@ -184,7 +184,7 @@ void jogar(int dif) {
 
 					al_flip_display();
 
-					al_rest(0.5);					
+					al_rest(0.5);
 				}
 				else if (event.keyboard.keycode == ALLEGRO_KEY_A) {
 					entradas[record] = 1;
@@ -209,7 +209,7 @@ void jogar(int dif) {
 
 					al_rest(0.5);
 
-					
+
 				}
 				else if (event.keyboard.keycode == ALLEGRO_KEY_W) {
 					entradas[record] = 3;
@@ -234,7 +234,7 @@ void jogar(int dif) {
 
 					al_rest(0.5);
 
-					
+
 				}
 				else if (event.keyboard.keycode == ALLEGRO_KEY_S) {
 					entradas[record] = 4;
@@ -259,14 +259,14 @@ void jogar(int dif) {
 
 					al_rest(0.5);
 
-					
+
 				}
 				else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
 					gameover = 0;
 					win = 0;
-					break;										
+					break;
 				}
-			}	
+			}
 			al_clear_to_color(al_map_rgb(0, 0, 0));
 
 			al_draw_filled_rectangle(300, 200, 400, 300, al_map_rgb(238, 173, 45)); //255 255 0 Q
@@ -297,13 +297,13 @@ void jogar(int dif) {
 	if (win) {
 		ganhou(dif);
 	}
-	else {	
+	else {
 		perdeu();
 	}
 	free(fila);
 }
 
-int confereSeq(int seq[], int tam, FILA *f) {	
+int confereSeq(int seq[], int tam, FILA * f) {
 	NO* aux = f->inicio;
 	for (int i = 0; i < tam; i++) {
 		if (seq[i] == aux->cor)
@@ -315,12 +315,12 @@ int confereSeq(int seq[], int tam, FILA *f) {
 	return 1;
 }
 
-void reproduzirSequencia(FILA* f, int qtde) {
+void reproduzirSequencia(FILA * f, int qtde) {
 	ALLEGRO_FONT* font = al_create_builtin_font();
 	NO* aux = f->inicio;
 	int i = 0;
-	while (i < qtde) {		
-		al_clear_to_color(al_map_rgb(000, 000, 000));				
+	while (i < qtde) {
+		al_clear_to_color(al_map_rgb(000, 000, 000));
 		/* =====CORES=====
 		 * Azul 1
 		 * Amarelo 2
@@ -449,15 +449,15 @@ void reproduzirSequencia(FILA* f, int qtde) {
 	al_flip_display();
 }
 
-void geraSeq(int dificuldade, FILA *f) {
+void geraSeq(int dificuldade, FILA * f) {
 	if (dificuldade == 0) {
-		for (int i = 0; i < 20; i++) {			
-			int cor = rand()%4;
-			
+		for (int i = 0; i < 20; i++) {
+			int cor = rand() % 4;
+
 			if (f->inicio == NULL) {
 				NO* aux = (NO*)malloc(sizeof(NO));
 				aux->prox = NULL;
-				aux->cor = cor+1;
+				aux->cor = cor + 1;
 				f->inicio = aux;
 			}
 			else {
@@ -466,12 +466,12 @@ void geraSeq(int dificuldade, FILA *f) {
 		}
 	}
 	else if (dificuldade == 1) {
-		for (int i = 0; i < 30; i++) {			
-			int cor = rand()%0;			
+		for (int i = 0; i < 30; i++) {
+			int cor = rand() % 4;
 			if (f->inicio == NULL) {
 				NO* aux = (NO*)malloc(sizeof(NO));
 				aux->prox = NULL;
-				aux->cor = cor+1;
+				aux->cor = cor + 1;
 				f->inicio = aux;
 			}
 			else {
@@ -480,12 +480,12 @@ void geraSeq(int dificuldade, FILA *f) {
 		}
 	}
 	else if (dificuldade == 2) {
-		for (int i = 0; i < 50; i++) {			
-			int cor = rand()%4;			
+		for (int i = 0; i < 50; i++) {
+			int cor = rand() % 4;
 			if (f->inicio == NULL) {
 				NO* aux = (NO*)malloc(sizeof(NO));
 				aux->prox = NULL;
-				aux->cor = cor+1;
+				aux->cor = cor + 1;
 				f->inicio = aux;
 			}
 			else {
@@ -495,16 +495,16 @@ void geraSeq(int dificuldade, FILA *f) {
 	}
 }
 
-void insereFila(FILA *f) {	
-	NO* aux = f->inicio;	
+void insereFila(FILA * f) {
+	NO* aux = f->inicio;
 	while (aux->prox != NULL)
 		aux = aux->prox;
 
-	int cor = rand()%4;
-	NO* a2 = (NO*)malloc(sizeof(NO));
+	int cor = rand() % 4;
+	NO * a2 = (NO*)malloc(sizeof(NO));
 	a2->prox = NULL;
-	a2->cor = cor+1;
-	aux->prox = a2;	
+	a2->cor = cor + 1;
+	aux->prox = a2;
 }
 
 void perdeu() {
@@ -518,9 +518,8 @@ void perdeu() {
 
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 200, ALLEGRO_ALIGN_CENTER, "=====================DERROTA=====================");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 210, ALLEGRO_ALIGN_CENTER, "||Que pena :(                                   ||");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||Você perdeu na dificuldade: fácil             ||");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "||Tente uma novamente                           ||");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 240, ALLEGRO_ALIGN_CENTER, "==================================================");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||Tente uma novamente                           ||");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "==================================================");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"B\" para voltar.");
 
 	al_flip_display();
@@ -538,8 +537,8 @@ void perdeu() {
 				al_draw_bitmap(imagem, 300, 50, 0);
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 250, ALLEGRO_ALIGN_CENTER, "====Bem vindo ao GENIUS!====");
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 270, ALLEGRO_ALIGN_CENTER, "Tecle \"J\" para jogar.");
-				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para créditos.");
-				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"E\" para sair.");				
+				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para crÃ©ditos.");
+				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"E\" para sair.");
 
 				al_flip_display();
 				al_destroy_bitmap(imagem);
@@ -557,20 +556,20 @@ void ganhou(int dif) {
 
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 200, ALLEGRO_ALIGN_CENTER, "======================VITÓRIA=====================");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 210, ALLEGRO_ALIGN_CENTER, "||Parabéns! Você entrou para o hall da fama!    ||");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 200, ALLEGRO_ALIGN_CENTER, "======================VITÃ“RIA=====================");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 210, ALLEGRO_ALIGN_CENTER, "||ParabÃ©ns! VocÃª entrou para o hall da fama!    ||");
 
 	if (dif == 0) {
-		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||Você passou pela dificuldade: fácil           ||");
-		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "||Tente uma nova difículdade!                   ||");
+		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||VocÃª passou pela dificuldade: fÃ¡cil           ||");
+		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "||Tente uma nova difÃ­culdade!                   ||");
 	}
 	else if (dif == 1) {
-		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||Você passou pela dificuldade: médio           ||");
-		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "||Você esta quase se tornando uma lenda!        ||");
+		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||VocÃª passou pela dificuldade: mÃ©dio           ||");
+		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "||VocÃª esta quase se tornando uma lenda!        ||");
 	}
 	else {
-		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||Você passou pela dificuldade: DÍFICIL         ||");
-		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "||Você conseguiu! Agora você é uma lenda!       ||");
+		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||VocÃª passou pela dificuldade: DÃFICIL         ||");
+		al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "||VocÃª conseguiu! Agora vocÃª Ã© uma lenda!       ||");
 	}
 
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 240, ALLEGRO_ALIGN_CENTER, "==================================================");
@@ -586,13 +585,17 @@ void ganhou(int dif) {
 			if (event.keyboard.keycode == ALLEGRO_KEY_B) {
 				action = 0;
 				al_clear_to_color(al_map_rgb(0, 0, 0));
-
+				ALLEGRO_BITMAP* imagem = NULL;
+				imagem = al_load_bitmap("GENIUS.png");
+				al_draw_bitmap(imagem, 300, 50, 0);
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 250, ALLEGRO_ALIGN_CENTER, "====Bem vindo ao GENIUS!===");
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 270, ALLEGRO_ALIGN_CENTER, "Tecle \"J\" para jogar.");
-				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para créditos.");
+				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para crÃ©ditos.");
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"E\" para sair.");
 
 				al_flip_display();
+
+				al_destroy_bitmap(imagem);
 			}
 		}
 	}
@@ -623,16 +626,20 @@ void creditos() {
 			if (event.keyboard.keycode == ALLEGRO_KEY_B) {
 				action = 0;
 				al_clear_to_color(al_map_rgb(0, 0, 0));
-
+				ALLEGRO_BITMAP* imagem = NULL;
+				imagem = al_load_bitmap("GENIUS.png");
+				al_draw_bitmap(imagem, 300, 50, 0);
+				
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 250, ALLEGRO_ALIGN_CENTER, "====Bem vindo ao GENIUS!===");
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 270, ALLEGRO_ALIGN_CENTER, "Tecle \"J\" para jogar.");
-				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para créditos.");
+				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para crÃ©ditos.");
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"E\" para sair.");
 
 				al_flip_display();
+				al_destroy_bitmap(imagem);
 			}
 		}
-	}	
+	}
 }
 
 int dificuldade() {
@@ -645,9 +652,9 @@ int dificuldade() {
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 200, ALLEGRO_ALIGN_CENTER, "===========DIFICULDADE============");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 210, ALLEGRO_ALIGN_CENTER, "||Tecle \"0\" para fácil.       ||");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||Tecle \"1\" para médio.       ||");
-	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "||Tecle \"2\" para difícil.     ||");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 210, ALLEGRO_ALIGN_CENTER, "||Tecle \"0\" para fÃ¡cil.       ||");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 220, ALLEGRO_ALIGN_CENTER, "||Tecle \"1\" para mÃ©dio.       ||");
+	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 230, ALLEGRO_ALIGN_CENTER, "||Tecle \"2\" para difÃ­cil.     ||");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 240, ALLEGRO_ALIGN_CENTER, "=============================");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"B\" para voltar.");
 
@@ -661,18 +668,21 @@ int dificuldade() {
 			if (event.keyboard.keycode == ALLEGRO_KEY_B) {
 				action = 0;
 				al_clear_to_color(al_map_rgb(0, 0, 0));
-
+				ALLEGRO_BITMAP* imagem = NULL;
+				imagem = al_load_bitmap("GENIUS.png");
+				al_draw_bitmap(imagem, 300, 50, 0);
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 250, ALLEGRO_ALIGN_CENTER, "====Bem vindo ao GENIUS!===");
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 270, ALLEGRO_ALIGN_CENTER, "Tecle \"J\" para jogar.");
-				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para créditos.");
+				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para crÃ©ditos.");
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"E\" para sair.");
 
 				al_flip_display();
+				al_destroy_bitmap(imagem);
 
 				return -1;
 			}
 			else if (event.keyboard.keycode == ALLEGRO_KEY_PAD_0 || event.keyboard.keycode == ALLEGRO_KEY_0) {
-				action = 0;				
+				action = 0;
 				return 0;
 			}
 			else if (event.keyboard.keycode == ALLEGRO_KEY_PAD_1 || event.keyboard.keycode == ALLEGRO_KEY_1) {
