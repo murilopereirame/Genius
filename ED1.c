@@ -1,6 +1,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_image.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -36,16 +37,18 @@ int main() {
 	ALLEGRO_DISPLAY * disp = al_create_display(800, 600);
 
 	ALLEGRO_FONT * font = al_create_builtin_font();
+	ALLEGRO_BITMAP* imagem = NULL;
 
+	al_init_image_addon();
 	al_init_primitives_addon();
-
+	imagem = al_load_bitmap("GENIUS.png");
 	al_clear_to_color(al_map_rgb(0, 0, 0));	
-
+	al_draw_bitmap(imagem, 300, 50, 0);
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 250, ALLEGRO_ALIGN_CENTER, "====Bem vindo ao GENIUS!====");	
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 270, ALLEGRO_ALIGN_CENTER, "Tecle \"J\" para jogar.");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para créditos.");
 	al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"E\" para sair.");
-
+	
 	al_flip_display();
 
 	int selection = 0;
@@ -57,9 +60,11 @@ int main() {
 		if (event.type == ALLEGRO_EVENT_KEY_UP)
 		{
 			if (event.keyboard.keycode == ALLEGRO_KEY_C) {
+				al_destroy_bitmap(imagem);
 				menu(2);								
 			}
 			else if (event.keyboard.keycode == ALLEGRO_KEY_J) {
+				al_destroy_bitmap(imagem);
 				menu(1);
 			}
 			else if (event.keyboard.keycode == ALLEGRO_KEY_E) {
@@ -528,13 +533,16 @@ void perdeu() {
 			if (event.keyboard.keycode == ALLEGRO_KEY_B) {
 				action = 0;
 				al_clear_to_color(al_map_rgb(0, 0, 0));
-
-				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 250, ALLEGRO_ALIGN_CENTER, "====Bem vindo ao GENIUS!===");
+				ALLEGRO_BITMAP* imagem = NULL;
+				imagem = al_load_bitmap("GENIUS.png");
+				al_draw_bitmap(imagem, 300, 50, 0);
+				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 250, ALLEGRO_ALIGN_CENTER, "====Bem vindo ao GENIUS!====");
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 270, ALLEGRO_ALIGN_CENTER, "Tecle \"J\" para jogar.");
 				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 285, ALLEGRO_ALIGN_CENTER, "Tecle \"C\" para créditos.");
-				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"E\" para sair.");
+				al_draw_text(font, al_map_rgb(255, 255, 255), 400, 550, ALLEGRO_ALIGN_CENTER, "Tecle \"E\" para sair.");				
 
 				al_flip_display();
+				al_destroy_bitmap(imagem);
 			}
 		}
 	}
